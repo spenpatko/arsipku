@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="id" class="dark h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARSIPKU - Arsip Digital GenggamanKu</title>
+    
+    <!-- Blogger Metadata Hide Support & Fullscreen Overrides -->
+    <style>
+        /* Sembunyikan elemen bawaan Blogger jika dipasang di Blogger Theme/Page */
+        .header-widget, .blog-feeds, .post-footer, #comments, .sidebar-container, #blog-pager, footer.entry-meta, header.entry-header { display: none !important; }
+        body { margin: 0 !important; padding: 0 !important; background-color: #090d16 !important; overflow-x: hidden; font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* Custom Glassmorphism Effect */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel-glow {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 25px -5px rgba(14, 165, 233, 0.15);
+        }
+        .glass-input {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #f8fafc;
+            transition: all 0.2s ease;
+        }
+        .glass-input:focus {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+            outline: none;
+        }
+        
+        /* Custom Animations */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+        }
+        .animate-pulse-slow {
+            animation: pulseGlow 6s infinite ease-in-out;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #090d16; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            cyan: '#06b6d4',
+                            indigo: '#6366f1'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-white">
+
+    <!-- Blogger Hidden Metadata Element -->
+    <div style="display:none;" id="blogger-meta-thumbnail">
+        <img src="https://placehold.co/600x400/0f172a/38bdf8?text=Drive+Portal" alt="Thumbnail">
+        <p>Portal Akses Pintar Google Drive Multi-User</p>
+    </div>
+
+    <!-- BACKGROUND GLOW ACCENTS -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-cyan-600/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute top-1/3 -right-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+        <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- MAIN WRAPPER CONTAINER -->
+    <div class="relative z-10 flex-1 flex flex-col justify-between max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4">
+
+        <!-- TOP NAVBAR -->
+        <header class="glass-panel rounded-2xl px-5 py-4 mb-6 flex items-center justify-between transition-all duration-300">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                    <i data-lucide="hard-drive" class="w-5 h-5 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg text-white leading-none flex items-center gap-2">
+                        ArsipKu <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">v1.0</span>
+                    </h1>
+                    <p class="text-xs text-slate-400 mt-0.5">Arsip Digital GenggamanKu</p>
+                </div>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center gap-3">
+                <!-- Status Badge -->
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/60 border border-slate-800 text-xs text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 -ml-4"></span>
+                    <span>Live Connected</span>
+                </div>
+
+                <!-- User Profile / Logout (Hidden Pre-login) -->
+                <div id="navUserProfile" class="hidden flex items-center gap-3 pl-3 border-l border-slate-800">
+                    <div class="text-right hidden sm:block">
+                        <div id="navUserName" class="text-xs font-bold text-slate-200">User Name</div>
+                        <div id="navUserRole" class="text-[10px] text-cyan-400 font-semibold uppercase tracking-wider">Role</div>
+                    </div>
+                    <button onclick="handleLogout()" class="p-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 transition hover:scale-105" title="Keluar">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT SPA SECTION -->
+        <main class="flex-1 flex flex-col justify-center py-2">
+
+            <!-- 1. LANDING & LOGIN VIEW -->
+            <section id="viewLanding" class="grid lg:grid-cols-12 gap-8 items-center py-4">
+                
+                <!-- Hero Left Column -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/60 text-xs font-medium text-cyan-400">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-cyan-400"></i>
+                        <span>Akses Google Drive Personal & Praktis</span>
+                    </div>
+
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight tracking-tight">
+                        Pintu Masuk Terpadu ke <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-indigo-400 to-emerald-400">Google Drive Anda</span>
+                    </h2>
+
+                    <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Buka folder materi, berkas tugas, dan repositori dokumen Anda secara instan tanpa perlu mencari tautan manual. Kecepatan maksimal, aman, dan terintegrasi.
+                    </p>
+
+                    <!-- Bento Feature Badges -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                        <div class="glass-panel p-3.5 rounded-xl flex items-center gap-3">
+                            <div class="p-2 rounded-lg bg-cyan-500/10 text-cyan-400"><i data-lucide="zap" class="w-5 h-5"></i></div>
+                            <div class="text-left">
+                                <h4 class="text-xs font-bold text-slate-200">Ultra Kencang</h4>
+                                <p class="text-[11px] text-slate-400">Akses 1-Klik Direct</p>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-3.5 rounded-xl flex items-center gap-3">
+                            <div class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400"><i data-lucide="shield-check" class="w-5 h-5"></i></div>
+                            <div class="text-left">
+                                <h4 class="text-xs font-bold text-slate-200">Aman & Privat</h4>
+                                <p class="text-[11px] text-slate-400">Hak Akses Khusus</p>
+                            </div>
+                        </div>
+                        <div class="glass-panel p-3.5 rounded-xl flex items-center gap-3 col-span-2 sm:col-span-1">
+                            <div class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400"><i data-lucide="cloud" class="w-5 h-5"></i></div>
+                            <div class="text-left">
+                                <h4 class="text-xs font-bold text-slate-200">Google Drive API</h4>
+                                <p class="text-[11px] text-slate-400">Tersinkronisasi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Login Card Right Column -->
+                <div class="lg:col-span-5 w-full max-w-md mx-auto">
+                    <div class="glass-panel-glow rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-2xl">
+                        <!-- Decorative Top Glow -->
+                        <div class="absolute -top-12 -right-12 w-32 h-32 bg-cyan-500/20 rounded-full blur-2xl"></div>
+
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                                <i data-lucide="key-round" class="w-5 h-5 text-cyan-400"></i> Masuk ke Account
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">Gunakan akun yang telah terdaftar di database</p>
+                        </div>
+
+                        <!-- Login Form -->
+                        <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Username</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                                        <i data-lucide="user" class="w-4 h-4"></i>
+                                    </span>
+                                    <input type="text" id="loginUsername" required placeholder="Contoh: admin atau peserta" 
+                                           class="w-full glass-input rounded-xl pl-10 pr-4 py-2.5 text-sm placeholder:text-slate-600">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Password</label>
+                                <div class="relative">
+                                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                                        <i data-lucide="lock" class="w-4 h-4"></i>
+                                    </span>
+                                    <input type="password" id="loginPassword" required placeholder="••••••••" 
+                                           class="w-full glass-input rounded-xl pl-10 pr-10 py-2.5 text-sm placeholder:text-slate-600">
+                                    <button type="button" onclick="togglePasswordVis('loginPassword', 'eyeIcon')" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-slate-300">
+                                        <i data-lucide="eye" id="eyeIcon" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between text-xs text-slate-400">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" checked class="rounded border-slate-700 bg-slate-800 text-cyan-500 focus:ring-0">
+                                    <span>Ingat Akun Saya</span>
+                                </label>
+                                <a href="javascript:void(0)" onclick="showToast('Silakan hubungi Admin untuk reset password.', 'info')" class="text-cyan-400 hover:underline">Lupa Password?</a>
+                            </div>
+
+                            <button type="submit" id="btnLoginSubmit" class="w-full py-3 px-4 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-emerald-400 to-indigo-400 hover:opacity-95 transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
+                                <span>Masuk Sekarang</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </form>
+
+                        <div class="mt-6 pt-4 border-t border-slate-800 text-center text-xs text-slate-500">
+                            Butuh bantuan akses? Contact Administrator Sistem
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 2. USER DASHBOARD VIEW -->
+            <section id="viewUserDashboard" class="hidden space-y-6">
+                <!-- User Bento Header -->
+                <div class="glass-panel rounded-3xl p-6 sm:p-8 relative overflow-hidden">
+                    <div class="absolute -top-24 -right-24 w-60 h-60 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                    
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
+                        <div class="space-y-2">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-semibold">
+                                <i data-lucide="check-circle-2" class="w-3.5 h-3.5"></i> User Dashboard Active
+                            </div>
+                            <h2 class="text-2xl sm:text-4xl font-extrabold text-white">
+                                Selamat Datang, <span id="dashUserFullName" class="text-cyan-400">Pengguna</span> 👋
+                            </h2>
+                            <p class="text-slate-400 text-sm">
+                                Tautan penyimpanan folder Google Drive Anda siap diakses.
+                            </p>
+                        </div>
+
+                        <!-- Direct Drive Launch Highlight Card -->
+                        <div class="w-full md:w-auto glass-panel-glow p-4 rounded-2xl flex items-center gap-4 bg-slate-900/80">
+                            <div class="p-3.5 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 text-slate-950">
+                                <i data-lucide="folder-open" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">Ruang Penyimpanan Saya</div>
+                                <div id="dashUserDriveStatus" class="text-sm font-bold text-white mb-1">Google Drive Ready</div>
+                                <a id="btnDirectDriveLaunch" href="#" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:text-cyan-300 group">
+                                    <span>Buka Folder Drive Saya</span>
+                                    <i data-lucide="external-link" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Grid Detail & Quick Actions -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    
+                    <!-- Account Details Bento -->
+                    <div class="glass-panel p-6 rounded-2xl space-y-4">
+                        <h3 class="text-sm font-bold text-white uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                            <i data-lucide="id-card" class="w-4 h-4 text-cyan-400"></i> Detail Akun Anda
+                        </h3>
+                        <div class="space-y-3 text-xs">
+                            <div class="flex justify-between py-2 border-b border-slate-800">
+                                <span class="text-slate-400">Username</span>
+                                <span id="infoUserUsername" class="font-semibold text-slate-200">-</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-slate-800">
+                                <span class="text-slate-400">Status Akun</span>
+                                <span id="infoUserStatus" class="font-semibold text-emerald-400 flex items-center gap-1">
+                                    <i data-lucide="check" class="w-3 h-3"></i> Aktif
+                                </span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-slate-800">
+                                <span class="text-slate-400">Peran Sistem</span>
+                                <span id="infoUserRole" class="font-semibold text-indigo-400">User / Peserta</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links Shortcuts -->
+                    <div class="md:col-span-2 glass-panel p-6 rounded-2xl space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-sm font-bold text-white uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                                <i data-lucide="link" class="w-4 h-4 text-indigo-400"></i> Tautan Drive Pribadi
+                            </h3>
+                            <button onclick="copyDriveUrl()" class="text-xs text-cyan-400 hover:underline flex items-center gap-1">
+                                <i data-lucide="copy" class="w-3 h-3"></i> Salin URL
+                            </button>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center justify-between gap-3">
+                            <div class="truncate text-xs font-mono text-cyan-300" id="userDriveUrlDisplay">
+                                https://drive.google.com/drive/folders/...
+                            </div>
+                            <a id="userDriveUrlLink" href="#" target="_blank" class="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition shrink-0">
+                                <i data-lucide="folder-symlink" class="w-4 h-4"></i> Akses
+                            </a>
+                        </div>
+
+                        <!-- Instruction Info Box -->
+                        <div class="p-4 rounded-xl bg-slate-800/40 border border-slate-700/50 flex items-start gap-3 text-xs text-slate-300">
+                            <i data-lucide="info" class="w-5 h-5 text-cyan-400 shrink-0 mt-0.5"></i>
+                            <p class="leading-relaxed">
+                                Pastikan Anda sudah login ke akun Google pada peramban/browser yang sama jika folder dikhususkan untuk email terpilih.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- 3. ADMIN DASHBOARD VIEW -->
+            <section id="viewAdminDashboard" class="hidden space-y-6">
+                
+                <!-- Admin Header & Actions Bar -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 glass-panel p-6 rounded-2xl">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-xs font-semibold mb-2">
+                            <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Admin Control Panel
+                        </div>
+                        <h2 class="text-2xl font-extrabold text-white">Manajemen Pengguna & Drive</h2>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <a href="https://drive.google.com" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs flex items-center gap-2 transition">
+                            <i data-lucide="hard-drive" class="w-4 h-4 text-cyan-400"></i> Master Drive Admin
+                        </a>
+                        <button onclick="openAddUserModal()" class="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-2 transition shadow-lg shadow-cyan-500/20">
+                            <i data-lucide="user-plus" class="w-4 h-4"></i> Tambah User Baru
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Admin Stats Bento Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="flex justify-between items-center text-slate-400 mb-2">
+                            <span class="text-xs font-medium">Total User</span>
+                            <i data-lucide="users" class="w-4 h-4 text-cyan-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-white" id="statTotalUsers">0</div>
+                    </div>
+
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="flex justify-between items-center text-slate-400 mb-2">
+                            <span class="text-xs font-medium">Link Drive Aktif</span>
+                            <i data-lucide="link" class="w-4 h-4 text-emerald-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-white" id="statActiveLinks">0</div>
+                    </div>
+
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="flex justify-between items-center text-slate-400 mb-2">
+                            <span class="text-xs font-medium">Role Admin</span>
+                            <i data-lucide="shield" class="w-4 h-4 text-indigo-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-white" id="statTotalAdmins">1</div>
+                    </div>
+
+                    <div class="glass-panel p-4 rounded-xl">
+                        <div class="flex justify-between items-center text-slate-400 mb-2">
+                            <span class="text-xs font-medium">Database Status</span>
+                            <i data-lucide="database" class="w-4 h-4 text-amber-400"></i>
+                        </div>
+                        <div class="text-xs font-bold text-emerald-400 mt-2 flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Connected
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management Table Panel -->
+                <div class="glass-panel rounded-2xl p-6 space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                            <i data-lucide="table" class="w-4 h-4 text-cyan-400"></i> Daftar Pengguna & Tautan Drive
+                        </h3>
+
+                        <!-- Search Bar -->
+                        <div class="relative w-full sm:w-64">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                                <i data-lucide="search" class="w-4 h-4"></i>
+                            </span>
+                            <input type="text" id="tableSearchInput" onkeyup="filterUserTable()" placeholder="Cari nama / username..." 
+                                   class="w-full glass-input rounded-xl pl-9 pr-3 py-1.5 text-xs">
+                        </div>
+                    </div>
+
+                    <!-- Table Responsive Container -->
+                    <div class="overflow-x-auto rounded-xl border border-slate-800">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="bg-slate-900/80 text-slate-400 uppercase font-semibold border-b border-slate-800">
+                                <tr>
+                                    <th class="py-3 px-4">Pengguna</th>
+                                    <th class="py-3 px-4">Role</th>
+                                    <th class="py-3 px-4">Status</th>
+                                    <th class="py-3 px-4">Target Google Drive URL</th>
+                                    <th class="py-3 px-4 text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody" class="divide-y divide-slate-800/60">
+                                <!-- Table Rows injected dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="mt-8 pt-4 border-t border-slate-800/80 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div>
+                © 2026 Tim IT Spenpatko.
+            </div>
+            <div class="flex gap-4">
+                <a href="javascript:void(0)" onclick="showToast('Sistem Portal versi 2.5 berjalan lancar.', 'info')" class="hover:text-slate-400">System Info</a>
+                <a href="javascript:void(0)" onclick="showToast('Dokumentasi telah siap.', 'info')" class="hover:text-slate-400">Panduan</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- MODAL: ADD / EDIT USER -->
+    <div id="userModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass-panel-glow w-full max-w-lg rounded-2xl p-6 relative space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                <h3 id="modalTitle" class="text-base font-bold text-white flex items-center gap-2">
+                    <i data-lucide="user-cog" class="w-5 h-5 text-cyan-400"></i> Edit Pengguna
+                </h3>
+                <button onclick="closeUserModal()" class="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form id="userModalForm" onsubmit="saveUserForm(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="modalUserIndex">
+                
+                <div>
+                    <label class="block text-slate-300 font-semibold mb-1">Username</label>
+                    <input type="text" id="modalUsername" required class="w-full glass-input rounded-xl px-3 py-2 text-xs">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-semibold mb-1">Nama Lengkap</label>
+                    <input type="text" id="modalFullName" required class="w-full glass-input rounded-xl px-3 py-2 text-xs">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-semibold mb-1">Password</label>
+                    <input type="text" id="modalPassword" required class="w-full glass-input rounded-xl px-3 py-2 text-xs font-mono">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 font-semibold mb-1">Role</label>
+                        <select id="modalRole" class="w-full glass-input bg-slate-900 rounded-xl px-3 py-2 text-xs">
+                            <option value="User">User / Peserta</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-semibold mb-1">Status</label>
+                        <select id="modalStatus" class="w-full glass-input bg-slate-900 rounded-xl px-3 py-2 text-xs">
+                            <option value="Aktif">Aktif</option>
+                            <option value="Nonaktif">Nonaktif</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-semibold mb-1">Tautan / URL Google Drive</label>
+                    <input type="url" id="modalDriveUrl" required placeholder="https://drive.google.com/drive/folders/..." class="w-full glass-input rounded-xl px-3 py-2 text-xs font-mono">
+                </div>
+
+                <div class="pt-3 border-t border-slate-800 flex justify-end gap-2">
+                    <button type="button" onclick="closeUserModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold">
+                        Simpan Data
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- JAVASCRIPT LOGIC & STATE MANAGEMENT -->
+    <script>
+        // CONFIG & DUMMY DATA STATE
+        let IS_PREVIEW = true;
+        let currentUser = null;
+
+        // Sample Database State (Mirrors GAS Backend Google Sheet Data)
+        let usersDatabase = [
+            {
+                username: "admin",
+                password: "admin@2026",
+                fullName: "Administrator",
+                role: "Admin",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/home"
+            },
+            {
+                username: "ridna",
+                password: "spenpatko@2026",
+                fullName: "Ridna Saatul Izza, S.Pd.",
+                role: "User",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/folders/1IsUM0TAZeyjcjl9eDIb4JqsipTbbdK7s?usp=drive_link"
+            },
+            {
+                username: "ilham",
+                password: "spenpatko@2026",
+                fullName: "Ilham Minalloh, S.Pd.",
+                role: "User",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/folders/1Nyyoq-EIkUAHGrKyvGF4eLmXKHEfyjuE?usp=drive_link"
+            },
+	    {
+		username: "jalil",
+                password: "spenpatko@2026",
+                fullName: "Abd. Jalil Mochlas, S.Si.",
+                role: "User",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/folders/1sdXtIUyw8Vz-QHlS9pkMYyah0ssCAmwn?usp=drive_link"
+            },
+	    {
+        	username: "arie",
+                password: "spenpatko@2026",
+                fullName: "Arie Prihandono, S.Pd.",
+                role: "User",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/folders/1UsKcRaZgsUQ3YuMUqv33pZ7K5Me2k4d6?usp=drive_link"
+            },
+	    {	
+		username: "ibnul",
+                password: "spenpatko@2026",
+                fullName: "Ibnul Mubarok, S.E.",
+                role: "User",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/folders/1UdXN5GTv1Xm1Oqgu_OqXpzosPMNu-BO6?usp=drive_link"
+            },
+	    {	
+		username: "soleha",
+                password: "spenpatko@2026",
+                fullName: "Soleha Andriyani, S.Pd.",
+                role: "User",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/folders/1-2-tGjbaCJDURQiJ1kAEidWllxZuTyNk?usp=drive_link"
+            },
+	    {
+		username: "hendra",
+                password: "spenpatko@2026",
+                fullName: "Hendra Prata, S.Pd.I",
+                role: "User",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/folders/10CWsSUT2TlQHflCDzqfruMvR2Y311Fg2?usp=drive_link"
+            },
+	    {
+		username: "arni",
+                password: "spenpatko@2026",
+                fullName: "Arniyak, S.E.",
+                role: "User",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/folders/1VKdnBB1kx8dMWAtZGA8kBJQEP6ww_q4V?usp=drive_link"
+            },
+	    {
+		username: "lain",
+                password: "spenpatko@2026",
+                fullName: "Dok. Lain-Lain",
+                role: "User",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/folders/1fSSk4CWaafjiIsPrsE_aPAcdhSoJ2lS1?usp=drive_link"
+            },
+	    {
+		username: "surat",
+                password: "spenpatko@2026",
+                fullName: "Dok. Surat",
+                role: "User",
+                status: "Aktif",
+                driveUrl: "https://drive.google.com/drive/folders/1GtYLkEqzDrJOYPI3JyA-lUT1sD0v5_PU?usp=drive_link"
+            },
+        ];
+
+        // INIT APPLICATION
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderUserTable();
+        });
+
+        // PREVIEW TOGGLE FUNCTION
+        function togglePreviewState() {
+            IS_PREVIEW = !IS_PREVIEW;
+            const btn = document.getElementById('previewToggleBtn');
+	    if(IS_PREVIEW) {
+                btn.innerText = "IS_PREVIEW = true";
+                btn.className = "px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold";
+                showToast("Mode Demo Aktif. Menggunakan data statis.", "info");
+            } else {
+                btn.innerText = "IS_PREVIEW = false (GAS Live)";
+                btn.className = "px-2.5 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-semibold";
+                showToast("Mode Production Siap Terkoneksi Google Apps Script.", "warning");
+            }
+        }
+
+        function fillDemoCredentials(role) {
+            if(role === 'admin') {
+                document.getElementById('loginUsername').value = 'admin';
+                document.getElementById('loginPassword').value = 'edudigital';
+            } else {
+                document.getElementById('loginUsername').value = 'peserta';
+                document.getElementById('loginPassword').value = 'edudigital';
+            }
+        }
+
+        // PASSWORD VISIBILITY TOGGLE
+        function togglePasswordVis(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
+            }
+        }
+
+        // LOGIN HANDLER
+        function handleLogin(e) {
+            e.preventDefault();
+            const uname = document.getElementById('loginUsername').value.trim();
+            const pass = document.getElementById('loginPassword').value.trim();
+
+            const btnSubmit = document.getElementById('btnLoginSubmit');
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = `<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Memeriksa Akses...</span>`;
+            lucide.createIcons();
+
+            setTimeout(() => {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = `<span>Masuk Sekarang</span><i data-lucide="arrow-right" class="w-4 h-4"></i>`;
+                lucide.createIcons();
+
+                const foundUser = usersDatabase.find(u => u.username.toLowerCase() === uname.toLowerCase() && u.password === pass);
+
+                if (foundUser) {
+                    if (foundUser.status !== 'Aktif') {
+                        showToast('Akun Anda dinonaktifkan. Hubungi Admin.', 'error');
+                        return;
+                    }
+                    currentUser = foundUser;
+                    showToast(`Selamat datang kembali, ${foundUser.fullName}!`, 'success');
+                    updateNavUser();
+                    
+                    if (foundUser.role === 'Admin') {
+                        switchView('viewAdminDashboard');
+                    } else {
+                        switchView('viewUserDashboard');
+                        setupUserDashboard();
+                    }
+                } else {
+                    showToast('Username atau password salah!', 'error');
+                }
+            }, 600);
+        }
+
+        // LOGOUT HANDLER
+        function handleLogout() {
+            currentUser = null;
+            document.getElementById('navUserProfile').classList.add('hidden');
+            switchView('viewLanding');
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            showToast('Berhasil keluar dari akun.', 'info');
+        }
+
+        // NAVIGATION & VIEW SWITCHER
+        function switchView(viewId) {
+            document.getElementById('viewLanding').classList.add('hidden');
+            document.getElementById('viewUserDashboard').classList.add('hidden');
+            document.getElementById('viewAdminDashboard').classList.add('hidden');
+
+            document.getElementById(viewId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateNavUser() {
+            if (!currentUser) return;
+            document.getElementById('navUserProfile').classList.remove('hidden');
+            document.getElementById('navUserName').innerText = currentUser.fullName;
+            document.getElementById('navUserRole').innerText = currentUser.role;
+        }
+
+        // USER DASHBOARD BINDING
+        function setupUserDashboard() {
+            document.getElementById('dashUserFullName').innerText = currentUser.fullName;
+            document.getElementById('infoUserUsername').innerText = currentUser.username;
+            document.getElementById('infoUserRole').innerText = currentUser.role === 'Admin' ? 'Administrator' : 'User / Peserta';
+            
+            const driveDisplay = document.getElementById('userDriveUrlDisplay');
+            const driveLink = document.getElementById('userDriveUrlLink');
+            const btnDirect = document.getElementById('btnDirectDriveLaunch');
+
+            driveDisplay.innerText = currentUser.driveUrl;
+            driveLink.href = currentUser.driveUrl;
+            btnDirect.href = currentUser.driveUrl;
+        }
+
+        function copyDriveUrl() {
+            if (!currentUser) return;
+            const tempInput = document.createElement("input");
+            tempInput.value = currentUser.driveUrl;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            showToast("URL Google Drive berhasil disalin!", "success");
+        }
+
+        // ADMIN MANAGEMENT TABLE FUNCTIONS
+        function renderUserTable() {
+            const tbody = document.getElementById('userTableBody');
+            tbody.innerHTML = '';
+
+            let activeCount = 0;
+            let adminCount = 0;
+
+            usersDatabase.forEach((usr, index) => {
+                if(usr.status === 'Aktif') activeCount++;
+                if(usr.role === 'Admin') adminCount++;
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-800/40 transition";
+                tr.innerHTML = `
+                    <td class="py-3 px-4">
+                        <div class="font-bold text-white">${usr.fullName}</div>
+                        <div class="text-[11px] text-slate-500">@${usr.username}</div>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${usr.role === 'Admin' ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30' : 'bg-slate-800 text-slate-300'}">
+                            ${usr.role}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${usr.status === 'Aktif' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-rose-500/20 text-rose-400 border border-rose-500/30'}">
+                            ${usr.status}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 max-w-xs truncate font-mono text-cyan-400">
+                        <a href="${usr.driveUrl}" target="_blank" class="hover:underline flex items-center gap-1">
+                            <span class="truncate">${usr.driveUrl}</span>
+                            <i data-lucide="external-link" class="w-3 h-3 shrink-0"></i>
+                        </a>
+                    </td>
+                    <td class="py-3 px-4 text-right">
+                        <div class="flex items-center justify-end gap-1">
+                            <button onclick="editUserModal(${index})" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-400" title="Edit">
+                                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                            </button>
+                            <button onclick="deleteUser(${index})" class="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400" title="Hapus">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Update Stats
+            document.getElementById('statTotalUsers').innerText = usersDatabase.length;
+            document.getElementById('statActiveLinks').innerText = activeCount;
+            document.getElementById('statTotalAdmins').innerText = adminCount;
+
+            lucide.createIcons();
+        }
+
+        function filterUserTable() {
+            const query = document.getElementById('tableSearchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#userTableBody tr');
+            
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        // MODAL FUNCTIONS
+        function openAddUserModal() {
+            document.getElementById('modalTitle').innerText = 'Tambah Pengguna Baru';
+            document.getElementById('modalUserIndex').value = '-1';
+            document.getElementById('modalUsername').value = '';
+            document.getElementById('modalFullName').value = '';
+            document.getElementById('modalPassword').value = 'edudigital';
+            document.getElementById('modalRole').value = 'User';
+            document.getElementById('modalStatus').value = 'Aktif';
+            document.getElementById('modalDriveUrl').value = 'https://drive.google.com/drive/folders/';
+            
+            document.getElementById('userModal').classList.remove('hidden');
+        }
+
+        function editUserModal(index) {
+            const usr = usersDatabase[index];
+            document.getElementById('modalTitle').innerText = 'Edit Pengguna';
+            document.getElementById('modalUserIndex').value = index;
+            document.getElementById('modalUsername').value = usr.username;
+            document.getElementById('modalFullName').value = usr.fullName;
+            document.getElementById('modalPassword').value = usr.password;
+            document.getElementById('modalRole').value = usr.role;
+            document.getElementById('modalStatus').value = usr.status;
+            document.getElementById('modalDriveUrl').value = usr.driveUrl;
+
+            document.getElementById('userModal').classList.remove('hidden');
+        }
+
+        function closeUserModal() {
+            document.getElementById('userModal').classList.add('hidden');
+        }
+
+        function saveUserForm(e) {
+            e.preventDefault();
+            const idx = parseInt(document.getElementById('modalUserIndex').value);
+            
+            const userData = {
+                username: document.getElementById('modalUsername').value.trim(),
+                fullName: document.getElementById('modalFullName').value.trim(),
+                password: document.getElementById('modalPassword').value.trim(),
+                role: document.getElementById('modalRole').value,
+                status: document.getElementById('modalStatus').value,
+                driveUrl: document.getElementById('modalDriveUrl').value.trim()
+            };
+
+            if (idx === -1) {
+                // Add new
+                usersDatabase.push(userData);
+                showToast('Pengguna baru berhasil ditambahkan.', 'success');
+            } else {
+                // Update
+                usersDatabase[idx] = userData;
+                showToast('Data pengguna berhasil diperbarui.', 'success');
+            }
+
+            closeUserModal();
+            renderUserTable();
+        }
+
+        function deleteUser(index) {
+            if (confirm(`Apakah Anda yakin ingin menghapus user "${usersDatabase[index].fullName}"?`)) {
+                usersDatabase.splice(index, 1);
+                renderUserTable();
+                showToast('Pengguna berhasil dihapus.', 'info');
+            }
+        }
+
+        // TOAST NOTIFICATION SYSTEM
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            let badgeColor = 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30';
+            let icon = 'info';
+
+            if(type === 'success') {
+                badgeColor = 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+                icon = 'check-circle';
+            } else if (type === 'error') {
+                badgeColor = 'bg-rose-500/20 text-rose-400 border-rose-500/30';
+                icon = 'alert-circle';
+            } else if (type === 'warning') {
+                badgeColor = 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+                icon = 'alert-triangle';
+            }
+
+            toast.className = `pointer-events-auto glass-panel px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 border text-xs text-white transform transition duration-300 translate-y-2 opacity-0 ${badgeColor}`;
+            toast.innerHTML = `
+                <i data-lucide="${icon}" class="w-4 h-4 shrink-0"></i>
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
